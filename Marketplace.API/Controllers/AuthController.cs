@@ -30,6 +30,20 @@
 
             return Ok(user);
         }
+
+        [HttpPost("login")]
+        public IActionResult Login(User user)
+        {
+            var existingUser = _context.Users
+                .FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+
+            if (existingUser == null)
+            {
+                return Unauthorized("Invalid email or password");
+            }
+
+            return Ok(existingUser);
+        }
     }
 }
 
