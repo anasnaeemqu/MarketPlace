@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Marketplace.API.Domain;
+using Marketplace.API.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Marketplace.API.Infrastructure;
-using Marketplace.API.Domain;
 
 namespace Marketplace.API.Controllers;
 
@@ -21,6 +22,7 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
+    [Authorize]
     // REGISTER
     [HttpPost("register")]
     public IActionResult Register(User user)
